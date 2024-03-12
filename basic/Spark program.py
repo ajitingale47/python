@@ -145,9 +145,46 @@ df1=spark.read.format("CSV").option("inferschema","true").option("header","true"
 #df1=df.withColumn("dr",dense_rank().over(Window.partitionBy("did").orderBy(col("sal").desc())))
 #df2=df1.filter(df1["dr"]==2)
 
+#date_format change
+#df1=df.withColumn("NF",date_format(df["doj"],"dd-mm-yyyy"))
 
-df2.show()
+#currentdate
+#df1=df.withColumn("toady",current_date())
+
+#current_timestamp()
+#df1=df.withColumn("Time Stamp",current_timestamp())
+
+#datediff
+#df1=df.withColumn("workdur",datediff(lit(current_date()),df["doj"]))
+
+#date_add(days)
+
+#df1=df.withColumn("adddate",date_add(df["doj"],7))
+
+#date_sub
+#df1=df.withColumn("subdate",date_sub(df["doj"],7))
+
+#add_months (add & sub)
+#df1=df.withColumn("addmonth",add_months(df["doj"],7))
+#df1=df.withColumn("submonth",add_months(df["doj"],-7))
+
+#year,month,dayofweek,dayofmonth
+#df1=df.withColumn("y",year(df["doj"]))
+#df1=df.withColumn("y",month(df["doj"]))
+#df1=df.withColumn("y",dayofweek(df["doj"]))
+#df1=df.withColumn("y",dayofmonth(df["doj"]))
+
+#time
+#df1=df.withColumn("time",hour(df["doj"]))
+#df1=df.withColumn("time",minute(df["doj"]))
+
+#dropnullvalues
+#df1=df.dropna()
+
+#fillna
+#df1=df.fillna("NA")
 
 
 
+df1.show(30,False)
 
