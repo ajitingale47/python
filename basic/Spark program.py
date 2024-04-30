@@ -33,15 +33,15 @@ df=spark.read.format("CSV").option("inferschema","true").option("header","true")
 ##groupBy filter##
 #df1=df.groupBy("did").count().filter(df["did"]==101)
 
-##LIMIT##
 
+##LIMIT##
 #df1=df.limit(5)
 
 ##orderBy(ASC & DESC)
-#df1=df.orderBy("sal")
+#df1=df.orderBy(df["sal"])
 #df1=df.orderBy(df["sal"].desc())
 
-##LIKE FUN
+##LIKE FUNction
 
 #df1=df.filter(df["ename"].like ("%a"))
 #df1=df.filter(df["ename"].like("%a%"))
@@ -105,21 +105,21 @@ df=spark.read.format("CSV").option("inferschema","true").option("header","true")
 
 #join on multiple column
 #df2=df.join((df1,df["did"]==df1["dept_did"]) & (df["city"]==df1["city"]))
-#df2.show(1000)
+#df2.show()
 
 #file 3 read
 df1=spark.read.format("CSV").option("inferschema","true").option("header","true").load("f:/Json/emp1.csv")
 #df2.show()
 
 #set oparators in spark
-
+#union work like unionall
 #df2=df.union(df1)
 #df2=df.union(df1).distinct()
 
 #intersect
 #df2=df.intersect(df1)
 
-#exceptAll
+#exceptAll() means minus
 
 #df2=df.exceptAll(df1)
 
@@ -149,7 +149,7 @@ df1=spark.read.format("CSV").option("inferschema","true").option("header","true"
 #df1=df.withColumn("NF",date_format(df["doj"],"dd-mm-yyyy"))
 
 #currentdate
-#df1=df.withColumn("toady",current_date())
+#df1=df.withColumn("today",current_date())
 
 #current_timestamp()
 #df1=df.withColumn("Time Stamp",current_timestamp())
@@ -186,5 +186,6 @@ df1=spark.read.format("CSV").option("inferschema","true").option("header","true"
 
 
 
-df1.show(30,False)
+#df1.show(30,False)
+df1.printSchema()
 
